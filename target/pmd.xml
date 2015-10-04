@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd version="5.2.3" timestamp="2015-10-04T09:15:09.496">
+<file name="D:\Dropbox\Workspace\rga\src\main\java\com\rga\dao\impl\UserDaoImpl.java">
+<violation beginline="39" endline="44" begincolumn="13" endcolumn="13" rule="CollapsibleIfStatements" ruleset="Basic" package="com.rga.dao.impl" class="UserDaoImpl" method="update" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.2.3/pmd-java/rules/java/basic.html#CollapsibleIfStatements" priority="3">
+These nested if statements could be combined
+</violation>
+</file>
+</pmd>
