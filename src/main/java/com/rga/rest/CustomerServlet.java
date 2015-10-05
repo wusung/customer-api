@@ -28,12 +28,13 @@ public class CustomerServlet {
     public Response findAll() {
 
         String data = "";
+        String message = "Query success";
         List<Customer> customers = customerService.findAllCustomers();
         if (customers != null) {
             data = JSONValue.toJSONString(customers);
         }
 
-        return Response.status(200).entity(JSONUtils.makeJsonText(data)).build();
+        return Response.status(200).entity(JSONUtils.makeJsonText(data, message)).build();
     }
 
     @GET
@@ -42,12 +43,13 @@ public class CustomerServlet {
     public Response find(@PathParam("id") Integer id) {
 
         String data = "";
+        String message = "Query success";
         Customer customer = customerService.findCustomer(id);
         if (customer != null) {
             data = customer.toJSONString();
         }
 
-        String result = JSONUtils.makeJsonText(data);
+        String result = JSONUtils.makeJsonText(data, message);
         return Response.status(200).entity(result).build();
     }
 
@@ -56,11 +58,12 @@ public class CustomerServlet {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response add(Customer customer) {
         String data = "";
+        String message = "Add fail";
         boolean ok = customerService.addCustomer(customer);
         if (ok) {
-            data = "Add success";
+            message = "Add success";
         }
-        String result = JSONUtils.makeJsonText(data);
+        String result = JSONUtils.makeJsonText(data, message);
         return Response.status(200).entity(result).build();
     }
 
@@ -69,12 +72,13 @@ public class CustomerServlet {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response update(@PathParam("id") Integer id, Customer customer) {
         String data = "";
+        String message = "Update fail";
 
         boolean ok = customerService.updateCustomer(id, customer);
         if (ok) {
-            data = "Update success";
+            message = "Update success";
         }
-        return Response.status(200).entity(JSONUtils.makeJsonText(data)).build();
+        return Response.status(200).entity(JSONUtils.makeJsonText(data, message)).build();
     }
 
     @DELETE
@@ -83,12 +87,13 @@ public class CustomerServlet {
     public Response delete(@PathParam("id") Integer id) {
 
         String data = "";
+        String message = "Delete fail";
         boolean ok = customerService.removeCustomer(id);
         if (ok) {
-            data = "Delete success";
+            message = "Delete success";
         }
 
-        String result = JSONUtils.makeJsonText(data);
+        String result = JSONUtils.makeJsonText(data, message);
         return Response.status(200).entity(result).build();
     }
 }

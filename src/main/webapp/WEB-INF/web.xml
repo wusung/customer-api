@@ -27,6 +27,10 @@
         </listener-class>
     </listener>
 
+    <listener>
+        <listener-class>com.rga.listener.TestDataLoaderListener</listener-class>
+    </listener>
+
     <servlet>
         <servlet-name>jersey-serlvet</servlet-name>
         <servlet-class>

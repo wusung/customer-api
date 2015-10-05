@@ -18,4 +18,13 @@ public class JSONUtils {
         obj.put("data", data);
         return JSONValue.toJSONString(obj);
     }
+
+    public static String makeJsonText(String data, String message) {
+        Map obj = new LinkedHashMap();
+        obj.put("status", "ok");
+        obj.put("version", "1");
+        obj.put("data", data);
+        obj.put("message", message);
+        return JSONValue.toJSONString(obj);
+    }
 }

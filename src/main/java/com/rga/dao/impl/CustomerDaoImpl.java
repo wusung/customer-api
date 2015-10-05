@@ -18,18 +18,6 @@ public class CustomerDaoImpl implements CustomerDao {
 
     private ConcurrentMap<Integer, Customer> customers = new ConcurrentHashMap<>();
 
-    public CustomerDaoImpl() {
-        for (int i = 0; i < 100; i++) {
-            Customer c = new Customer();
-            c.setEmail(String.format("john%s@gmail.com", i));
-            c.setAddress(String.format("Address %s}", i));
-            c.setFirstname(String.format("First Name %s", i));
-            c.setLastname(String.format("Last Name %s", i));
-            c.setPhone(String.format("Phone %s", i));
-            insert(c);
-        }
-    }
-
     @Override
     public boolean insert(Customer customer) {
         if (customer.getId() == null) {
