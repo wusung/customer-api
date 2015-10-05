@@ -16,6 +16,23 @@ public class UserDaoImpl implements UserDao {
 
     private ConcurrentMap<String, User> users = new ConcurrentHashMap<>();
 
+    public UserDaoImpl() {
+
+        {
+            User user = new User();
+            user.setEmail("twkoci@gmail.com");
+            user.setPassword("franky");
+            insert(user);
+        }
+
+        {
+            User user = new User();
+            user.setEmail("rocky@gmail.com");
+            user.setPassword("1234");
+            insert(user);
+        }
+    }
+
     @Override
     public boolean insert(User user) {
         if (user == null)

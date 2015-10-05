@@ -5,7 +5,7 @@ package com.rga.service;
  * @since 2015/10/04
  */
 public interface AuthenticationService {
-    boolean authenticate(String userName);
+    boolean authenticate(String userName, String password);
     boolean login(String userName);
     boolean logout(String userName);
 }

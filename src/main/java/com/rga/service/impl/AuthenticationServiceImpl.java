@@ -18,13 +18,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private UserDao userDao;
 
     @Override
-    public boolean authenticate(String userName) {
+    public boolean authenticate(String userName, String password) {
         if (StringUtils.isEmpty(userName))
             throw new IllegalArgumentException("userName is null");
 
         User user = userDao.query(userName);
         if (user != null) {
-            return user.isLogin();
+            return password.equals(user.getPassword());
         }
         return false;
     }
@@ -37,6 +37,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = userDao.query(userName);
         if (user != null) {
             user.setIsLogin(true);
+            userDao.update(user);
             return true;
         }
         return false;
@@ -50,6 +51,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = userDao.query(userName);
         if (user != null) {
             user.setIsLogin(false);
+            userDao.update(user);
             return true;
         }
         return false;

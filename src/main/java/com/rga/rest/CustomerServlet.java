@@ -1,4 +1,4 @@
-package com.rga.rest.service;
+package com.rga.rest;
 
 import com.rga.model.Customer;
 import com.rga.service.CustomerService;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
