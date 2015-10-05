@@ -7,7 +7,7 @@ An insurance company needs a system to manage their customer data.  A software e
 *As a system user, I want to add new customer data into the system. After added, I can view a certain customer, and a customer list. Of course, I am also able to modify the data as well as remove it from the system.* 
 
 ## Demo site
-You can see demo site here. https://demo-customer-api.herokuapp.com/
+You can see demo site here. https://demo-customer-api.herokuapp.com/rest/customer
 
 ## Instructions
 Strongly suggest you use curl utility to test the following codes.
