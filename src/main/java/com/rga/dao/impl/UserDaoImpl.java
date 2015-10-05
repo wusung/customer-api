@@ -27,7 +27,7 @@ public class UserDaoImpl implements UserDao {
 
         {
             User user = new User();
-            user.setEmail("rocky@gmail.com");
+            user.setEmail("franky@gmail.com");
             user.setPassword("1234");
             insert(user);
         }
