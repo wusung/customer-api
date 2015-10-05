@@ -41,6 +41,13 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public int update(Customer customer) {
+        if (null == customer) {
+            throw new IllegalArgumentException("customer is null");
+        }
+        if (null == customer.getId()) {
+            throw new IllegalArgumentException("customer id is null");
+        }
+
         if (customers.containsKey(customer.getId())) {
             customers.replace(customer.getId(), customer);
             return 1;
@@ -52,6 +59,14 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public int delete(Customer customer) {
+
+        if (null == customer) {
+            throw new IllegalArgumentException("customer is null");
+        }
+        if (null == customer.getId()) {
+            throw new IllegalArgumentException("customer id is null");
+        }
+
         if (customers.containsKey(customer.getId())) {
             customers.remove(customer.getId());
             return 1;
