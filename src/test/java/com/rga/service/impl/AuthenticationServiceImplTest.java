@@ -50,6 +50,8 @@ public class AuthenticationServiceImplTest extends TestCase {
         boolean actual;
         actual = authenticationService.authenticate("BonnieFAllen@petroleumbiz.no", "");
         assertFalse(actual);
+
+
     }
 
     @Test(expected = IllegalArgumentException.class)
