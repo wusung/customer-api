@@ -31,7 +31,7 @@ public class AuthenticationServiceImplTest extends TestCase {
         user.setIsLogin(false);
         user.setName("Endy Cloudy");
         userDao.insert(user);
-        boolean actual = authenticationService.authenticate(user.getEmail());
+        boolean actual = authenticationService.authenticate(user.getEmail(), "");
         assertFalse(actual);
     }
 
@@ -41,14 +41,14 @@ public class AuthenticationServiceImplTest extends TestCase {
         user.setEmail("Charlie J. Jones");
         user.setIsLogin(false);
         userDao.insert(user);
-        boolean actual = authenticationService.authenticate(user.getEmail());
+        boolean actual = authenticationService.authenticate(user.getEmail(), "");
         assertFalse(actual);
     }
 
     @Test
     public void testAuthenticateNotExistedUser() throws Exception {
         boolean actual;
-        actual = authenticationService.authenticate("BonnieFAllen@petroleumbiz.no");
+        actual = authenticationService.authenticate("BonnieFAllen@petroleumbiz.no", "");
         assertFalse(actual);
     }
 
