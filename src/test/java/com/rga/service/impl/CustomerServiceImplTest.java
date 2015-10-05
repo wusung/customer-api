@@ -112,7 +112,7 @@ public class CustomerServiceImplTest extends TestCase {
         customer.setLastname("John New");
         customer.setPhone("028825252 New");
         actual = customerService.updateCustomer(4, customer);
-        assertTrue(actual)           ;
+        assertTrue(actual);
 
         Customer actualCustomer = customerService.findCustomer(4);
         assertEquals(customer.getAddress(), actualCustomer.getAddress());

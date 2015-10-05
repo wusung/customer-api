@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
@@ -56,13 +57,12 @@ public class CustomerServlet {
 
     @POST
     @Path("/")
-    public Response add(MultivaluedMap<String, String> formParams) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response add(Customer customer) {
         String data = "";
-
-        Customer customer = new Customer();
         boolean ok = customerService.addCustomer(customer);
         if (ok) {
-            data = "Add customer success";
+            data = "Add success";
         }
         String result = JSONUtils.makeJsonText(data);
         return Response.status(200).entity(result).build();
@@ -70,17 +70,15 @@ public class CustomerServlet {
 
     @PUT
     @Path("{id}")
-    public Response update(@PathParam("id") Integer id, MultivaluedMap<String, String> formParams) {
-        String result = "";
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response update(@PathParam("id") Integer id, Customer customer) {
+        String data = "";
 
-        Customer customer = new Customer();
         boolean ok = customerService.updateCustomer(id, customer);
         if (ok) {
-
-        } else {
-
+            data = "Update success";
         }
-        return Response.status(200).entity(result).build();
+        return Response.status(200).entity(JSONUtils.makeJsonText(data)).build();
     }
 
     @DELETE
