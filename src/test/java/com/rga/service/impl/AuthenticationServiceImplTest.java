@@ -55,7 +55,7 @@ public class AuthenticationServiceImplTest extends TestCase {
     @Test(expected = IllegalArgumentException.class)
     public void testAuthenticateUsernameIsNull() throws Exception {
         boolean actual;
-        actual = authenticationService.authenticate(null);
+        actual = authenticationService.authenticate(null, null);
         assertFalse(actual);
     }
 
