@@ -3,12 +3,12 @@ package com.rga.rest.service;
 import com.rga.model.Customer;
 import com.rga.service.CustomerService;
 import com.rga.utilty.JSONUtils;
+import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,15 +29,12 @@ public class CustomerServlet {
     public Response findAll() {
 
         String data = "";
-        List<Customer> customer = customerService.findAllCustomers();
-        if (customer != null) {
-            List json = new ArrayList<>();
-
-            //data = customer.toJSONString();
+        List<Customer> customers = customerService.findAllCustomers();
+        if (customers != null) {
+            data = JSONValue.toJSONString(customers);
         }
 
-        String result = JSONUtils.makeJsonText(data);
-        return Response.status(200).entity(result).build();
+        return Response.status(200).entity(JSONUtils.makeJsonText(data)).build();
     }
 
     @GET
