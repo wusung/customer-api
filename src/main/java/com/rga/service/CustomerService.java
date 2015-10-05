@@ -12,7 +12,8 @@ public interface CustomerService {
 
     boolean addCustomer(Customer customer);
     boolean removeCustomer(Integer customerId);
-    boolean updateCustomer(Customer newCustomer, Customer oldCustomer);
+    boolean updateCustomer(Integer customerId, Customer customer);
     Customer findCustomer(Integer customerId);
     List<Customer> findAllCustomers();
+    Integer getNextSequenceNumber();
 }

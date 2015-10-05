@@ -23,10 +23,9 @@ public class CustomerServiceImpl implements CustomerService {
         if (null == customer) {
             throw new IllegalArgumentException("customer is null");
         }
-        if (null == customer.getId()) {
-            throw new IllegalArgumentException("customerId is null");
-        }
 
+        if (customer.getId() == null)
+            customer.setId(customerDao.getNextSequenceNumber());
         return customerDao.insert(customer);
     }
 
@@ -43,8 +42,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public boolean updateCustomer(Customer newCustomer, Customer oldCustomer) {
-        int rowAffected = customerDao.update(newCustomer);
+    public boolean updateCustomer(Integer customerId, Customer customer) {
+        customer.setId(customerId);
+        int rowAffected = customerDao.update(customer);
         return rowAffected > 0;
     }
 
@@ -60,5 +60,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<Customer> findAllCustomers() {
         return customerDao.queryALl();
+    }
+
+    @Override
+    public Integer getNextSequenceNumber() {
+        return customerDao.getNextSequenceNumber();
     }
 }

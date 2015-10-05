@@ -21,7 +21,6 @@ public class CustomerDaoImpl implements CustomerDao {
     public CustomerDaoImpl() {
         for (int i = 0; i < 100; i++) {
             Customer c = new Customer();
-            c.setId(i);
             c.setEmail(String.format("john%s@gmail.com", i));
             c.setAddress(String.format("Address %s}", i));
             c.setFirstname(String.format("First Name %s", i));
@@ -33,6 +32,9 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public boolean insert(Customer customer) {
+        if (customer.getId() == null) {
+            customer.setId(getNextSequenceNumber());
+        }
         customers.put(customer.getId(), customer);
         return true;
     }
@@ -80,5 +82,9 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public int countAll() {
         return customers.size();
+    }
+
+    public Integer getNextSequenceNumber() {
+        return customers.size() + 1;
     }
 }

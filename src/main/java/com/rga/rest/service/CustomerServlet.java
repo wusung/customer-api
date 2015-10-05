@@ -3,7 +3,6 @@ package com.rga.rest.service;
 import com.rga.model.Customer;
 import com.rga.service.CustomerService;
 import com.rga.utilty.JSONUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,22 +24,30 @@ public class CustomerServlet {
     CustomerService customerService;
 
     @GET
-    @Path("{id}")
     @Produces("application/json")
-    public Response find(@PathParam("id") String id) {
+    public Response findAll() {
 
         String data = "";
-        if (StringUtils.isNotBlank(id)) {
-            Customer customer = customerService.findCustomer(Integer.valueOf(id));
-            if (customer != null) {
-                data = customer.toJSONString();
-            }
-        } else {
-            List<Customer> customer = customerService.findAllCustomers();
-            if (customer != null) {
-                List json = new ArrayList<>();
-                //data = customer.toJSONString();
-            }
+        List<Customer> customer = customerService.findAllCustomers();
+        if (customer != null) {
+            List json = new ArrayList<>();
+
+            //data = customer.toJSONString();
+        }
+
+        String result = JSONUtils.makeJsonText(data);
+        return Response.status(200).entity(result).build();
+    }
+
+    @GET
+    @Path("{id}")
+    @Produces("application/json")
+    public Response find(@PathParam("id") Integer id) {
+
+        String data = "";
+        Customer customer = customerService.findCustomer(id);
+        if (customer != null) {
+            data = customer.toJSONString();
         }
 
         String result = JSONUtils.makeJsonText(data);
@@ -49,13 +56,28 @@ public class CustomerServlet {
 
     @POST
     @Path("/")
-    public Response saveCustomer(MultivaluedMap<String, String> formParams) {
+    public Response add(MultivaluedMap<String, String> formParams) {
+        String data = "";
+
+        Customer customer = new Customer();
+        boolean ok = customerService.addCustomer(customer);
+        if (ok) {
+            data = "Add customer success";
+        }
+        String result = JSONUtils.makeJsonText(data);
+        return Response.status(200).entity(result).build();
+    }
+
+    @PUT
+    @Path("{id}")
+    public Response update(@PathParam("id") Integer id, MultivaluedMap<String, String> formParams) {
         String result = "";
 
         Customer customer = new Customer();
-//        boolean ok = customerService.addCustomer(customer);
-        boolean ok = true;
+        boolean ok = customerService.updateCustomer(id, customer);
         if (ok) {
+
+        } else {
 
         }
         return Response.status(200).entity(result).build();

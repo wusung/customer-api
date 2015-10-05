@@ -16,4 +16,5 @@ public interface CustomerDao {
     List<Customer> queryALl();
     void clear();
     int countAll();
+    Integer getNextSequenceNumber();
 }

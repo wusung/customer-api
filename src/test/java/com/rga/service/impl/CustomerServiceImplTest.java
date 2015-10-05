@@ -42,7 +42,7 @@ public class CustomerServiceImplTest extends TestCase {
         customerService.addCustomer(customer);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testAddCustomerIdIsNull() throws Exception {
 
         Customer customer = new Customer();
@@ -52,7 +52,8 @@ public class CustomerServiceImplTest extends TestCase {
         customer.setLastname("John");
         customer.setPhone("028825252");
 
-        customerService.addCustomer(customer);
+        boolean actual = customerService.addCustomer(customer);
+        assertTrue(actual);
     }
 
     @Test
@@ -92,7 +93,7 @@ public class CustomerServiceImplTest extends TestCase {
     @Test
     public void testFindCustomer() throws Exception {
         Customer customer = new Customer();
-        customer.setId(2);
+        customer.setId(1);
         customer.setAddress("Taipei Taiwan");
         customer.setEmail("john@gmail.com");
         customer.setFirstname("Cannon");
@@ -102,7 +103,7 @@ public class CustomerServiceImplTest extends TestCase {
         boolean actual = customerService.addCustomer(customer);
         assertTrue(actual);
 
-        Customer actualCustomer = customerService.findCustomer(2);
+        Customer actualCustomer = customerService.findCustomer(1);
         assertEquals(customer.getId(), actualCustomer.getId());
         assertEquals(customer.getFirstname(), actualCustomer.getFirstname());
         assertEquals(customer.getAddress(), actualCustomer.getAddress());
