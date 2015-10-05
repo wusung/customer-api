@@ -57,7 +57,7 @@ public class CustomerServiceImplTest extends TestCase {
     }
 
     @Test
-    public void testRemoveCustoemr() throws Exception {
+    public void testRemoveCustomer() throws Exception {
         Customer customer = new Customer();
         customer.setId(3);
         customer.setAddress("Taipei Taiwan");
@@ -74,6 +74,26 @@ public class CustomerServiceImplTest extends TestCase {
     }
 
     @Test
+    public void testRemoveNotExistedCustomer() throws Exception {
+        Customer customer = new Customer();
+        customer.setId(3);
+        customer.setAddress("Taipei Taiwan");
+        customer.setEmail("john@gmail.com");
+        customer.setFirstname("Cannon");
+        customer.setLastname("John");
+        customer.setPhone("028825252");
+
+        boolean actual = customerService.addCustomer(customer);
+        assertTrue(actual);
+
+        actual = customerService.removeCustomer(3);
+        assertTrue(actual);
+
+        actual = customerService.removeCustomer(3);
+        assertFalse(actual);
+    }
+
+    @Test
     public void testUpdateCustomer() throws Exception {
         Customer customer = new Customer();
         customer.setId(4);
@@ -86,8 +106,20 @@ public class CustomerServiceImplTest extends TestCase {
         boolean actual = customerService.addCustomer(customer);
         assertTrue(actual);
 
-        boolean actualCustomer = customerService.removeCustomer(4);
-        assertTrue(actualCustomer);
+        customer.setAddress("Taipei Taiwan New");
+        customer.setEmail("john@gmail.com New");
+        customer.setFirstname("Cannon New");
+        customer.setLastname("John New");
+        customer.setPhone("028825252 New");
+        actual = customerService.updateCustomer(4, customer);
+        assertTrue(actual)           ;
+
+        Customer actualCustomer = customerService.findCustomer(4);
+        assertEquals(customer.getAddress(), actualCustomer.getAddress());
+        assertEquals(customer.getEmail(), actualCustomer.getEmail());
+        assertEquals(customer.getFirstname(), actualCustomer.getFirstname());
+        assertEquals(customer.getLastname(), actualCustomer.getLastname());
+        assertEquals(customer.getPhone(), actualCustomer.getPhone());
     }
 
     @Test
